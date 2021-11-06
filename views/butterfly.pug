@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title 
+  p Kuchi Dhana Sri
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let butterfly  = [
+                    {
+                        "Brand": "Swallowtail Butterfly",
+                        "price": 50,
+                        "color": "orange"
+                    },
+                    {
+                        "Brand": "Brush-footed Butterfly",
+                        "price": 30,
+                        "color": "Black"
+                    },
+                    {
+                        "Brand": "American Snout Butterfly",
+                        "price": 20,
+                        "color": "yellow"
+                    },                  
+                     {
+                        "Brand": "Red Admiral Butterfly",
+                        "price": 30,
+                        "color": "red"
+                    },    
+                     {
+                        "Brand": "Monarch Butterfly",
+                        "price": 150,
+                        "color": "blue"
+                    },     
+                ]
+            each v,index in butterfly   
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.Brand}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.price}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
+                
+  script.                
+        function buy(intemNo)
+        {
+              alert(`you purchased Item ${intemNo+1}`)
+        }
