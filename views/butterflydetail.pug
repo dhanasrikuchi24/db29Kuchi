@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let butterflyid = toShow._id 
+  - let butterfly_type = toShow.butterfly_type 
+  - let butterflycost = toShow.cost 
+  - let butterflysize = toShow.size 
+  div 
+    div.row 
+      div(class='butterflyAttr mr-3') butterfly ID is: 
+      div #{butterflyid} 
+    div.row 
+      div(class='butterflyAttr mr-3') butterfly Type is: 
+      div #{butterfly_type} 
+    div.row 
+      div(class='butterflyAttr mr-3') butterfly Size is: 
+      div #{butterflysize} 
+    div.row 
+      div(class='butterflyAttr mr-3') butterfly Cost is: 
+      div #{butterflycost} 

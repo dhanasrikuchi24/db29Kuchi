@@ -37,16 +37,6 @@ exports.butterfly_create_post = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
- 
-// Handle butterfly delete form on DELETE. 
-exports.butterfly_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: butterfly delete DELETE ' + req.params.id); 
-}; 
- 
-// Handle butterfly update form on PUT. 
-exports.butterfly_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: butterfly update PUT' + req.params.id); 
-}; 
 
 // VIEWS 
 // Handle a show all view 
@@ -59,5 +49,59 @@ exports.butterfly_view_all_Page = async function(req, res) {
         res.status(500); 
         res.send(`{"error": ${err}}`); 
     } 
-    // GET request for one costume. 
+    // GET request for one butterfly. 
 }; 
+
+ // Handle a show one view with id specified by query 
+ exports.butterfly_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await butterfly.findById( req.query.id) 
+        res.render('butterflydetail',  { title: 'butterfly Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
+
+// Handle building the view for creating a butterfly. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.butterfly_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('butterflycreate', { title: 'butterfly Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle building the view for updating a butterfly. 
+// query provides the id 
+exports.butterfly_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await butterfly.findById(req.query.id) 
+        res.render('butterflyupdate', { title: 'butterfly Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle a delete one view with id from query 
+exports.butterfly_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await butterfly.findById(req.query.id) 
+        res.render('butterflydelete', { title: 'butterfly Delete', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+ 

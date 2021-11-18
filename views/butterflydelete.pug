@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let butterflyid = toShow._id 
+    - let butterfly_type = toShow.butterfly_type 
+    - let butterflycost = toShow.cost 
+    - let butterflysize = toShow.size 
+    - let actionid = "/resource/butterflys/" + butterflyid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='butterflyAttr mr-3') butterfly ID is: 
+        div #{butterflyid} 
+      div.row 
+        div(class='butterflyAttr mr-3') butterfly Type is: 
+        div #{butterfly_type} 
+      div.row 
+        div(class='butterflyAttr mr-3') butterfly Size is: 
+        div #{butterflysize} 
+      div.row 
+        div(class='butterflyAttr mr-3') butterfly Cost is: 
+        div #{butterflycost} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the butterfly collection 
+      window.location.href='/butterflys' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      // Don't need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/butterflys' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 
