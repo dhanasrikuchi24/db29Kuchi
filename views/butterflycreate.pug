@@ -3,13 +3,13 @@ extends layout
 block content 
   h1= title 
  
-  form(id='butterflyForm', action="/resource/butterflys", method="POST") 
+  form(id='butterflyForm', action="/resource/butterfly", method="POST") 
     div.form-group 
-        label.butterflyAttr(for='butterfly_type') butterfly type 
-        input#butterfly_type(type='text', name='butterfly_type') 
+        label.butterflyAttr(for='butterfly_Brand') butterfly type 
+        input#butterfly_type(type='text', name='butterfly_Brand') 
     div.form-group 
-        label.butterflyAttr(for='size') butterfly size 
-        input#size(type='text', name='size') 
+        label.butterflyAttr(for='color') butterfly size 
+        input#size(type='text', name='color') 
     div.form-group 
         label.butterflyAttr(for='cost') butterfly cost 
         input#cost(type='number', name='cost') 
@@ -31,4 +31,4 @@ block content
         // TODO handle error 
         alert("Save failed " + error ) 
       }); 
-    }); 
+    });

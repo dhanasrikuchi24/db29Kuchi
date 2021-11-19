@@ -1,43 +1,44 @@
-extends layout 
- 
-block content 
+block content
   h1= title 
- 
-  - let butterflyid = toShow._id 
-  - let butterfly_type = toShow.butterfly_type 
-  - let butterflycost = toShow.cost 
-  - let butterflysize = toShow.size 
-   
-  div.row(class='mb-2') 
-    div.mr-1 ID is 
-    div #{butterflyid} 
-  - let actionid = "/resource/butterflys/" + butterflyid 
-  form(id='butterflyForm', action= actionid, method="PUT") 
-    div.form-group 
-        label.butterflyAttr(for='butterfly_type') butterfly type 
-        input#butterfly_type(type='text', name='butterfly_type', value= butterfly_type ) 
-    div.form-group 
-        label.butterflyAttr(for='size') butterfly size 
-        input#size(type='text', name='size', value= butterflysize ) 
-    div.form-group 
-        label.butterflyAttr(for='cost') butterfly cost 
-        input#cost(type='number', name='cost', value= butterflycost ) 
-    input(type="submit") 
- 
-  script. 
-    document.forms['butterflyForm'].addEventListener('submit', (event) => { 
-      event.preventDefault(); 
-      // TODO do something here to show user that form is being submitted 
-      fetch(event.target.action, { 
-        method: 'PUT', 
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
-      }).then((resp) => { 
-        return resp.json(); // or resp.text() or whatever the server sends 
-      }).then((body) => { 
-        alert("Update succeded") 
-        // TODO handle body 
-      }).catch((error) => { 
-        // TODO handle error 
-        alert("Update failed " + error ) 
-      }); 
-    }); 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let butterflyid = toShow._id 
+    - let butterfly_type = toShow.butterfly_type 
+    - let butterflycost = toShow.cost 
+    - let butterflysize = toShow.size 
+    
+    div.row(class='mb-2') 
+        div.mr-1 ID is 
+        div #{butterflyid} 
+    - let actionid = "/resource/butterflys/" + butterflyid 
+    form(id='butterflyForm', action= actionid, method="PUT") 
+        div.form-group 
+            label.butterflyAttr(for='butterfly_type') butterfly type 
+            input#butterfly_type(type='text', name='butterfly_type', value= butterfly_type ) 
+        div.form-group 
+            label.butterflyAttr(for='size') butterfly size 
+            input#size(type='text', name='size', value= butterflysize ) 
+        div.form-group 
+            label.butterflyAttr(for='cost') butterfly cost 
+            input#cost(type='number', name='cost', value= butterflycost ) 
+        input(type="submit") 
+    
+    script. 
+        document.forms['butterflyForm'].addEventListener('submit', (event) => { 
+        event.preventDefault(); 
+        // TODO do something here to show user that form is being submitted 
+        fetch(event.target.action, { 
+            method: 'PUT', 
+            body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+        }).then((resp) => { 
+            return resp.json(); // or resp.text() or whatever the server sends 
+        }).then((body) => { 
+            alert("Update succeded") 
+            // TODO handle body 
+        }).catch((error) => { 
+            // TODO handle error 
+            alert("Update failed " + error ) 
+        }); 
+        }); 
+        extends layout
